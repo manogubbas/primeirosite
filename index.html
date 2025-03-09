@@ -1,0 +1,115 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Nos dois by gubbas</title>
+    <link href="https://fonts.googleapis.com/css2?family=Merriweather:wght@400;700&display=swap" rel="stylesheet">
+    <style>
+        body {
+            font-family: 'Merriweather', serif;
+            text-align: center;
+            background-color: #ffebef;
+            padding: 20px;
+            overflow: hidden;
+            position: relative;
+        }
+        .container {
+            background: white;
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+            display: inline-block;
+            position: relative;
+            z-index: 1;
+            width: 80vmin; /* Tamanho baseado em 80% da largura ou altura da tela */
+            height: 86vmin; /* Altura igual à largura, garantindo um quadrado */
+            max-width: 400px; /* Limita o tamanho máximo */
+            max-height: 1000px; /* Limita o tamanho máximo */
+        }
+        #resultado {
+            font-size: 20px;
+            margin-top: 20px;
+        }
+        .imagem {
+            margin-top: 20px;
+            width: 100%;
+            max-width: 300px;
+            border-radius: 10px;
+        }
+
+        /* Estilos para a chuva de emojis */
+        .emoji {
+            position: absolute;
+            font-size: 2rem;
+            animation: cair 5s linear infinite;
+        }
+
+        /* Animação de cair */
+        @keyframes cair {
+            0% {
+                top: -50px;
+                opacity: 1;
+            }
+            100% {
+                top: 100vh;
+                opacity: 0;
+            }
+        }
+    </style>
+</head>
+<body onload="calcularTempo(); gerarChuvaEmojis()">
+    <div class="container">
+        <h2>Você tem os olhos mais bonitos que eu já vi desde o dia 13 de outubro de 2023, mas eles são meus há:</h2>
+        <img src="c:\Users\gubbas\Desktop\Jessica\Jessica.jpg" alt="Foto do casal" class="imagem">
+        <p id="resultado">Calculando...</p>
+        <iframe style="border-radius:12px" src="https://open.spotify.com/embed/track/7325x5azZOlWkYL9EpnqW5?si=cf8dc443e9cb46cc" width="300" height="80" frameborder="0" allowfullscreen="" allow="autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture"></iframe>
+        <p>Cada momento com você é muito especial pra mim, espero continuar escrevendo nossa história até o final de nossas vidas. Te amo, Espetáculo estranho. 💗</p>
+    </div>
+
+    <script>
+        function calcularTempo() {
+            const dataInicio = new Date("2023-10-20"); // Defina a data do início do namoro aqui
+            const agora = new Date();
+            let anos = agora.getFullYear() - dataInicio.getFullYear();
+            let meses = agora.getMonth() - dataInicio.getMonth();
+            let dias = agora.getDate() - dataInicio.getDate();
+            let horas = agora.getHours();
+            let minutos = agora.getMinutes();
+            let segundos = agora.getSeconds();
+
+            // Ajuste para dias
+            if (dias < 0) {
+                meses--;
+                dias += new Date(agora.getFullYear(), agora.getMonth(), 0).getDate();
+            }
+            // Ajuste para meses
+            if (meses < 0) {
+                anos--;
+                meses += 12;
+            }
+
+            // Atualiza o texto com a informação
+            document.getElementById("resultado").innerText = `${anos} ano, ${meses} meses, ${dias} dias, ${horas} horas, ${minutos} minutos, ${segundos} segundos 💖`;
+        }
+
+        // Atualizar o tempo a cada segundo para mostrar horas, minutos e segundos corretamente
+        setInterval(calcularTempo, 1000);
+
+        function gerarChuvaEmojis() {
+            const emojis = ["💗", "💖", "💘", "💓", "🌹", "💕", "😻"];
+            const quantidade = 50; // Número de emojis
+
+            for (let i = 0; i < quantidade; i++) {
+                const emojiElement = document.createElement("div");
+                emojiElement.classList.add("emoji");
+                emojiElement.textContent = emojis[Math.floor(Math.random() * emojis.length)];
+                emojiElement.style.left = Math.random() * window.innerWidth + "px"; // Posição aleatória
+                emojiElement.style.animationDuration = Math.random() * 5 + 5 + "s"; // Tempo aleatório para cair
+
+                document.body.appendChild(emojiElement);
+            }
+        }
+    </script>
+</body>
+</html>
